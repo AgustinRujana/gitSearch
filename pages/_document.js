@@ -15,7 +15,7 @@ class MyDocument extends Document {
           <meta name='author' content='Agustin Rujana' />
           <Favicons />
         </Head>
-        <body className=' selection:bg-purple-600 selection:text-white'>
+        <body className=' selection:bg-purple-700 selection:text-white'>
           <Main />
           <NextScript />
         </body>

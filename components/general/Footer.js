@@ -14,7 +14,7 @@ const Footer = () => {
         {social.map((item) => (
           <li key={item.href}>
             <a href={item.href} target='_blank' rel="noopener noreferrer">
-              <item.icon className="h-6 hover:text-purple-600 hover:rotate-[360deg] hover:scale-125 transform transition-all ease-in-out duration-1000" />
+              <item.icon className="h-6 hover:text-purple-700 hover:rotate-[360deg] hover:scale-125 transform transition-all ease-in-out duration-1000" />
             </a>
           </li>
         ))}

@@ -5,10 +5,10 @@ const Navbar = () => {
       <p className="text-3xl font-thin tracking-wide py-2 px-4 cursor-default select-none sm:hidden">AR</p>
       <div className="flex items-center justify-between gap-2  py-2 px-4">
         <a href="/">
-          <p className="font-thin uppercase tracking-wide hover:scale-105 hover:text-purple-600 transition-all">Home</p>
+          <p className="font-thin uppercase tracking-wide hover:scale-105 hover:font-normal hover:text-purple-700 transition-all">Home</p>
         </a>
         <a href="/storico">
-				<p className="font-thin uppercase tracking-wide hover:scale-105 hover:text-purple-600 transition-all">Storico</p>
+				<p className="font-thin uppercase tracking-wide hover:scale-105 hover:font-normal hover:text-purple-700 transition-all">Storico</p>
         </a>
       </div>
     </nav>
