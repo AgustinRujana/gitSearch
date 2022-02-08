@@ -1,6 +1,6 @@
 const SearchBar = () => {
   return (
-      <div className="relative z-0 w-full max-w-xl group mx-4">
+      <div className="relative z-0 w-full max-w-xl group px-4">
         <input
           type="text"
           name="user_search"
