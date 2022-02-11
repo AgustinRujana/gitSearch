@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { LocationMarkerIcon } from '@heroicons/react/outline';
 
 const SearchBar = () => {
@@ -28,6 +29,16 @@ const SearchBar = () => {
     }
   }, [user]);
 
+  const handleSave = (user) => {
+    let storico = JSON.parse(localStorage.getItem('storico'))
+
+    if (storico === null) {
+      localStorage.setItem('storico', JSON.stringify([user]));
+    } else {
+      localStorage.setItem('storico', JSON.stringify([...storico, user]));
+    }
+  };
+
   return (
     <div className='w-full max-w-xl relative px-4'>
       <div className='relative z-0 group'>
@@ -48,7 +59,11 @@ const SearchBar = () => {
         </label>
         {activeSearch ? (
           user ? (
-            <a href={user.html_url} target='_blank'>
+            <a
+              href={user.html_url}
+              target='_blank'
+              onClick={() => handleSave(user)}
+            >
               <div className='flex items-center p-2 text-white transition-all duration-500 bg-gradient-to-t from-gray-700 via-gray-800 to-gray-900 bg-size-200 bg-pos-0 hover:bg-pos-100'>
                 <img
                   className='rounded-full h-12 mr-2'
@@ -66,7 +81,7 @@ const SearchBar = () => {
                     {user.location && (
                       <p className='flex items-center text-sm tracking-tight truncate text-gray-400'>
                         <LocationMarkerIcon className='h-4 mr-1' />
-                        {user.location}
+                        {user.location}0
                       </p>
                     )}
                   </div>
