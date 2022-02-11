@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react';
+import { LocationMarkerIcon } from '@heroicons/react/outline';
 
 const SearchBar = () => {
   const [search, setSearch] = useState('');
-  const [user, setUser] = useState(false);
+
+  const [user, setUser] = useState({});
+  const [activeSearch, setActiveSearch] = useState(false);
 
   useEffect(() => {
     if (search !== '') {
-      fetch(`https://api.github.com/users/${search}`, {
-        headers: {
-          'User-Agent': 'request',
-        },
-      })
+      setActiveSearch(true);
+      fetch(`https://api.github.com/users/${search}`)
         .then((res) => res.json())
         .then((json) => {
           setUser(json);
         });
+    } else {
+      setActiveSearch(false);
     }
   }, [search]);
 
@@ -27,8 +29,8 @@ const SearchBar = () => {
   }, [user]);
 
   return (
-    <>
-      <div className='relative z-0 w-full max-w-xl group px-4'>
+    <div className='w-full max-w-xl relative px-4'>
+      <div className='relative z-0 group'>
         <input
           type='text'
           name='user_search'
@@ -44,63 +46,44 @@ const SearchBar = () => {
         >
           Cerca utente
         </label>
+        {activeSearch ? (
+          user ? (
+            <a href={user.html_url} target='_blank'>
+              <div className='flex items-center p-2 text-white transition-all duration-500 bg-gradient-to-t from-gray-700 via-gray-800 to-gray-900 bg-size-200 bg-pos-0 hover:bg-pos-100'>
+                <img
+                  className='rounded-full h-12 mr-2'
+                  src={`https://avatars.githubusercontent.com/${search}`}
+                />
+                <div className='w-full grid sm:grid-cols-2 gap-2'>
+                  <div className='col-span-1'>
+                    <p className='tracking-tight'>{user.name}</p>
+                    <p className='text-sm tracking-tight truncate text-gray-400'>
+                      {user.bio}
+                    </p>
+                  </div>
+                  <div className='col-span-1'>
+                    <p className='tracking-tight'>{user.company}</p>
+                    {user.location && (
+                      <p className='flex items-center text-sm tracking-tight truncate text-gray-400'>
+                        <LocationMarkerIcon className='h-4 mr-1' />
+                        {user.location}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </a>
+          ) : (
+            <div className='h-16 w-full absolute flex items-center justify-center text-white transition-all duration-500 bg-gradient-to-t from-gray-700 via-gray-800 to-gray-900 bg-size-200 bg-pos-0 hover:bg-pos-100'>
+              Nessun utente
+            </div>
+          )
+        ) : (
+          ''
+        )}
       </div>
-      {user ? (
-        <a href={user.html_url} target='_blank'>
-          <div></div>
-        </a>
-      ) : (
-        <div>Nessun utente</div>
-      )}
-    </>
+    </div>
   );
 };
 
 export default SearchBar;
-
-const user = {
-  login: 'octocat',
-  id: 1,
-  node_id: 'MDQ6VXNlcjE=',
-  avatar_url: 'https://github.com/images/error/octocat_happy.gif',
-  gravatar_id: '',
-  url: 'https://api.github.com/users/octocat',
-  html_url: 'https://github.com/octocat',
-  followers_url: 'https://api.github.com/users/octocat/followers',
-  following_url: 'https://api.github.com/users/octocat/following{/other_user}',
-  gists_url: 'https://api.github.com/users/octocat/gists{/gist_id}',
-  starred_url: 'https://api.github.com/users/octocat/starred{/owner}{/repo}',
-  subscriptions_url: 'https://api.github.com/users/octocat/subscriptions',
-  organizations_url: 'https://api.github.com/users/octocat/orgs',
-  repos_url: 'https://api.github.com/users/octocat/repos',
-  events_url: 'https://api.github.com/users/octocat/events{/privacy}',
-  received_events_url: 'https://api.github.com/users/octocat/received_events',
-  type: 'User',
-  site_admin: false,
-  name: 'monalisa octocat',
-  company: 'GitHub',
-  blog: 'https://github.com/blog',
-  location: 'San Francisco',
-  email: 'octocat@github.com',
-  hireable: false,
-  bio: 'There once was...',
-  twitter_username: 'monatheoctocat',
-  public_repos: 2,
-  public_gists: 1,
-  followers: 20,
-  following: 0,
-  created_at: '2008-01-14T04:33:35Z',
-  updated_at: '2008-01-14T04:33:35Z',
-  private_gists: 81,
-  total_private_repos: 100,
-  owned_private_repos: 100,
-  disk_usage: 10000,
-  collaborators: 8,
-  two_factor_authentication: true,
-  plan: {
-    name: 'Medium',
-    space: 400,
-    private_repos: 20,
-    collaborators: 0,
-  },
-};
