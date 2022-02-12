@@ -1,5 +1,7 @@
+//Components imports
 import { LocationMarkerIcon } from '@heroicons/react/outline';
 
+//This component read the user information send via props from storico localStorage, and renders it.
 const UserRows = (props) => {
   return (
     <li>

@@ -1,3 +1,13 @@
+//This are the icons, not included in @heroicons, to add one just copy and paste a previous one and place the path of the desire .svg
+//this allow us to change icons colours and properties via props.
+
+// // NewIcon
+// export const iconNewIcon = (props) => (
+//   <svg fill="currentColor" viewBox="0 0 48 48" {...props}>
+//      <path... HERE PASTE YOUR PATH
+//   </svg>
+// );
+
 // LinkedIn
 export const iconLinkedIn = (props) => (
   <svg fill="currentColor" viewBox="0 0 48 48" {...props}>

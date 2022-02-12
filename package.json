@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next dev -p 3070",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "createdoc": "jsdoc pages -r -d docs"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.5",

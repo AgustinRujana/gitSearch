@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 
+//Component Imports
 import { LocationMarkerIcon } from '@heroicons/react/outline';
 
+//This component is the input bar in charge of showing results and searching.
 const SearchBar = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(''); //This state saves the input value
+  const [user, setUser] = useState(false); //This state saves the search result if its a valid user
+  const [activeSearch, setActiveSearch] = useState(false); //This state saves when the input is being used
 
-  const [user, setUser] = useState({});
-  const [activeSearch, setActiveSearch] = useState(false);
-
+  //Every time a user type, search is change, this function checks if the input value is valid and make the API call if so.
   useEffect(() => {
     if (search !== '') {
       setActiveSearch(true);
@@ -21,17 +23,19 @@ const SearchBar = () => {
     }
   }, [search]);
 
+  //This function validates if the api response is a valid user.
   useEffect(() => {
     if (user.message) {
       setUser(false);
-    } else {
-      console.log(user);
     }
   }, [user]);
-
+  
+  //This function saves the user search historial in local, storage.
   const handleSave = (user) => {
+    //Get the item
     let storico = JSON.parse(localStorage.getItem('storico'))
 
+    //If its null it creates it, if not just update it
     if (storico === null) {
       localStorage.setItem('storico', JSON.stringify([user]));
     } else {
@@ -53,12 +57,14 @@ const SearchBar = () => {
         />
         <label
           htmlFor='user_search'
-          className='absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-4 peer-focus:text-purple-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
+          className='absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-purple-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6'
         >
           Cerca utente
         </label>
         {activeSearch ? (
+          //If there is an active search
           user ? (
+            //And the user is a real value, renders the user information
             <a
               href={user.html_url}
               target='_blank'
@@ -89,11 +95,13 @@ const SearchBar = () => {
               </div>
             </a>
           ) : (
+            //If there is no user found
             <div className='h-16 w-full absolute flex items-center justify-center text-white transition-all duration-500 bg-gradient-to-t from-gray-700 via-gray-800 to-gray-900 bg-size-200 bg-pos-0 hover:bg-pos-100'>
               Nessun utente
             </div>
           )
         ) : (
+          //If there is no search in progress
           ''
         )}
       </div>

@@ -1,6 +1,8 @@
+//This is the main storico page.
+
 import Head from 'next/head';
 
-//Imports
+//Components Imports
 import Footer from '../../components/general/Footer';
 import Navbar from '../../components/general/Navbar';
 import ContainerStorico from '../../components/storico/ContainerStorico';

@@ -1,3 +1,4 @@
+//Components Imports
 import { iconGithub } from "../icons";
 import SearchBar from "./components/SearchBar";
 

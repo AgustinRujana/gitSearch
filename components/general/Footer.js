@@ -1,11 +1,14 @@
+//Icons imports
 import { iconGithub, iconGoogle, iconLinkedIn } from "../icons";
 
+//Creating social object for rendering
 const social = [
   { href: "https://www.linkedin.com/in/agustinrujana/", icon: iconLinkedIn },
   { href: "https://github.com/AgustinRujana", icon: iconGithub },
   { href: "mailto:agustinrujanacontact@gmail.com", icon: iconGoogle },
 ];
 
+//This function creates the footer by mapping social object
 const Footer = () => {
   return (
     <div className="w-full bg-white py-16 text-gray-900 sm:flex text-center items-center justify-center gap-4">

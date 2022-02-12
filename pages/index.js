@@ -1,6 +1,8 @@
+//This is the main page
+
 import Head from "next/head";
 
-//Imports
+//Component imports
 import Footer from "../components/general/Footer";
 import Navbar from "../components/general/Navbar";
 import ContainerSearch from "../components/search/ContainerSearch";
